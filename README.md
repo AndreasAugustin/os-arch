@@ -1,6 +1,8 @@
-# template
+# os-arch
 
-![Lint](https://github.com/AndreasAugustin/template/workflows/Lint/badge.svg)
+![Lint](https://github.com/AndreasAugustin/os-arch/workflows/Lint/badge.svg)
+
+This repository contains build information about the OS.
 
 ## DEV
 
