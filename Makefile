@@ -27,9 +27,9 @@ markdownlint: ## Validate markdown files
 	docker-compose run docs markdownlint .github/ --ignore node_modules
 	docker-compose run docs markdownlint . --ignore node_modules
 
-.PHONY: bash
-bash: ## open dev container with build environment
-	docker-compose run --user="${UID}:${GID}" --service-ports dev /bin/bash
+.PHONY: zsh
+zsh: ## open dev container with build environment
+	docker-compose run --user="${UID}:${GID}" --service-ports dev /bin/zsh
 
 .PHONY: prune
 prune: ## delete the whole environment
