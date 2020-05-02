@@ -1,6 +1,6 @@
 # Maintainer: Andreas Augustin <dev@andreas-augustin.org>
 pkgname=oh-my-zsh
-pkgver=0.1.0
+pkgver=r5628.173d4ca68
 pkgrel=1
 pkgdesc="upside_down_face A delightful community-driven (with 1500+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. https://ohmyz.sh/"
 arch=('any')
@@ -20,6 +20,11 @@ install=${pkgname}.install
 source=(${pkgname}::git+https://github.com/ohmyzsh/ohmyzsh)
 # noextract=()
 md5sums=('SKIP') #autofill using updpkgsums
+
+pkgver() {
+  cd ${pkgname}
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 build() {
   echo "build"

@@ -4,11 +4,8 @@ SHELL := /bin/bash
 ###########################
 # VARIABLES
 ###########################
-# UID := $(id -u)
-# GID := $(id -g)
-#
-UID := 1000
-GID := 985
+UID := $$(id -u)
+GID := $$(id -g)
 
 ##########################
 # MAPPINGS
@@ -26,6 +23,10 @@ help:  ## help target to show available commands with information
 markdownlint: ## Validate markdown files
 	docker-compose run docs markdownlint .github/ --ignore node_modules
 	docker-compose run docs markdownlint . --ignore node_modules
+
+.PHONY: build-oh-my-zsh
+build-oh-my-zsh: ## build the oh-my-zsh package
+	docker-compose run --user="${UID}:${GID}" -w /app/packages/oh-my-zsh dev makepkg
 
 .PHONY: zsh
 zsh: ## open dev container with build environment

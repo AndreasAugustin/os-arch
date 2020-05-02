@@ -1,4 +1,4 @@
-name: Lint
+name: makepkg
 
 on: [push]
 
@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: markdownlint
-      run: make markdownlint
+    - name: build
+      run: make build
     - name: prune
       run: make prune
