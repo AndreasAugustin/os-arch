@@ -1,0 +1,30 @@
+# Maintainer: Andreas Augustin <dev@andreas-augustin.org>
+pkgname=oh-my-zsh
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="upside_down_face A delightful community-driven (with 1500+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. https://ohmyz.sh/"
+arch=('any')
+url="https://github.com/ohmyzsh/ohmyzsh"
+license=('MIT')
+# groups=()
+depends=('zsh')
+makedepends=('git')
+# optdepends=()
+# provides=(asdf)
+# conflicts=()
+# replaces=()
+# backup=()
+# options=()
+install=${pkgname}.install
+# changelog=
+source=(${pkgname}::git+https://github.com/ohmyzsh/ohmyzsh)
+# noextract=()
+md5sums=('SKIP') #autofill using updpkgsums
+
+build() {
+  echo "build"
+}
+
+package() {
+  echo "package"
+}

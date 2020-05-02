@@ -1,15 +1,9 @@
 #######################################
 # image for dev build environment
 ######################################
-FROM alpine:3.11 as DEV
-# install packages
-RUN apk add --update --no-cache bash make git zsh curl tmux
+FROM archlinux as DEV
 
-# Make zsh your default shell for tmux
-RUN echo "set-option -g default-shell /bin/zsh" >> /root/.tmux.conf
-
-# install oh-my-zsh
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN pacman -Sy --noconfirm base-devel git zsh
 
 WORKDIR /app
 

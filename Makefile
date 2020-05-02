@@ -4,8 +4,13 @@ SHELL := /bin/bash
 ###########################
 # VARIABLES
 ###########################
+# UID := $(id -u)
+# GID := $(id -g)
+#
+UID := 1000
+GID := 985
 
-###########################
+##########################
 # MAPPINGS
 ###########################
 
@@ -22,7 +27,10 @@ markdownlint: ## Validate markdown files
 	docker-compose run docs markdownlint .github/ --ignore node_modules
 	docker-compose run docs markdownlint . --ignore node_modules
 
-.PHONY: zsh
-zsh: ## open dev container with build environment
-	docker-compose run --service-ports dev /bin/zsh
+.PHONY: bash
+bash: ## open dev container with build environment
+	docker-compose run --user="${UID}:${GID}" --service-ports dev /bin/bash
 
+.PHONY: prune
+prune: ## delete the whole environment
+	docker-compose down -v --rmi all --remove-orphans
