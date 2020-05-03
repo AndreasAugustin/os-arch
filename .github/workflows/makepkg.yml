@@ -12,5 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: build
       run: make build
+    - name: install
+      run: make install
     - name: prune
       run: make prune

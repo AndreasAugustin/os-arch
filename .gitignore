@@ -3,5 +3,6 @@
 packages/oh-my-zsh/*.pkg.tar.xz
 packages/oh-my-zsh/**
 
+!packages/oh-my-zsh/clean.sh
 !packages/oh-my-zsh/PKGBUILD
 !packages/oh-my-zsh/*.install

@@ -26,10 +26,15 @@ pkgver() {
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
-build() {
-  echo "build"
+prepare() {
+  cd "${srcdir}/${pkgname}"
+  cp "templates/zshrc.zsh-template" "zshrc"
 }
 
 package() {
-  echo "package"
+  cd "${srcdir}/${pkgname}"
+
+  mkdir -p "${pkgdir}/usr/share/oh-my-zsh"
+  install -D -m644 "LICENSE.txt" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  cp -r * "${pkgdir}/usr/share/oh-my-zsh/"
 }

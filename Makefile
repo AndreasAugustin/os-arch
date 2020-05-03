@@ -4,12 +4,18 @@ SHELL := /bin/bash
 ###########################
 # VARIABLES
 ###########################
-UID := $$(id -u)
-GID := $$(id -g)
 
 ##########################
 # MAPPINGS
 ###########################
+
+###########################
+# Repo targets
+############################
+
+.PHONY: update
+update: ## update repository with actual home
+	cp ~/.zshrc .dot/.zshrc
 
 ###########################
 # TARGETS
@@ -24,14 +30,22 @@ markdownlint: ## Validate markdown files
 	docker-compose run docs markdownlint .github/ --ignore node_modules
 	docker-compose run docs markdownlint . --ignore node_modules
 
-.PHONY: build-oh-my-zsh
-build-oh-my-zsh: ## build the oh-my-zsh package
-	docker-compose run --user="${UID}:${GID}" -w /app/packages/oh-my-zsh dev makepkg
+.PHONY: clean
+clean: ## clean all build artefacts
+	docker-compose run -w /app/packages/oh-my-zsh dev ./clean.sh
+
+.PHONY: build
+build: ## build all packages
+	docker-compose run -w /app/packages/oh-my-zsh dev makepkg
+
+.PHONY: install
+install: ## installall packages
+	docker-compose run -w /app/packages/oh-my-zsh dev makepkg --install
 
 .PHONY: zsh
 zsh: ## open dev container with build environment
-	docker-compose run --user="${UID}:${GID}" --service-ports dev /bin/zsh
+	docker-compose run --service-ports dev /bin/zsh
 
 .PHONY: prune
-prune: ## delete the whole environment
+prune: clean ## delete the whole environment
 	docker-compose down -v --rmi all --remove-orphans
